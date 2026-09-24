@@ -10,12 +10,14 @@ Open `portal/index.html` in a browser. It's a single file with no build step.
 | --- | --- |
 | **Portal** | See the current commission's progress (measured → cloth cut → baste → forward fitting → finishing → collection), the next fitting, their measurements and saved designs |
 | **1 · Measure** | Enter height and weight, then take a front and side photo (or upload them). The scan maps 10 measurements plus posture notes, and suggests a size, drop and fit |
-| **2 · Design** | Build the suit on a live drawing: 9 cloths or any custom colour, cut (SB 1/2/3, DB 6×2), silhouette, lapel style and width, pockets, trousers, buttons, lining, vents, tie and monogram. The price updates as options change |
-| **3 · Review** | A cutting ticket with the full spec and measurements. Book a fitting slot |
+| **2 · Design** | Two paths. **Build it here:** a 3D mannequin you can turn (front, side, back, detail) wearing woven cloth. Choose from 9 cloths or any custom colour, cut (SB 1/2/3, DB 6×2), silhouette (slim to relaxed), length, lapel style and width, pockets, pleats and leg width, buttons, lining, vents, tie and monogram. One-tap starting looks include a soft, wide cut. **Bring your idea:** upload reference photos, note what you like about each, and describe it for the tailor |
+| **3 · Review** | A cutting ticket with the full spec, the client's reference photos and brief, and their measurements. Book a fitting slot |
 
 ## What is simulated
 
 - **Body scan.** The flow assumes a measurement app or service supplies the numbers; which one is decided later. Until then the measurements are estimated from height and weight.
+- **3D model.** The suit is generated in the browser with three.js (loaded from jsDelivr) using procedural woven-cloth textures. It looks like a product render, not a photo. Photoreal garments would need 3D assets made by an artist.
+- **Reference photos** stay in the browser for the session. A live version would upload them to the tailor.
 - **Client account, orders, bookings.** Everything is example data or kept in this browser's `localStorage`. Nothing is sent anywhere.
 - **Prices, cloths and timings** are placeholders to replace with the tailor's real numbers. Set the currency with `BRAND.currency` at the top of the script.
 
