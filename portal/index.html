@@ -930,7 +930,7 @@ $('#btn-scan').addEventListener('click', async () => {
   setStage('front', 'Opening camera…');
   camStream = await tryCamera();
   if (run !== scanRun) return;
-  setStage('front', camStream ? 'Step into the outline · front' : 'Demo scan · stand facing the camera');
+  setStage('front', camStream ? 'Step into the outline · front' : 'Stand facing the camera · front');
   await sleep(1100);
   if (!await countdown(run)) return;
   setStage('side', 'Turn to your left · side photo');

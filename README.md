@@ -15,7 +15,7 @@ Open `portal/index.html` in a browser. It's a single file with no build step.
 
 ## What is simulated
 
-- **Body scan.** The countdown, landmarks and measurements are staged. Measurements are estimated from height and weight, not read from the photos. A real version needs a body-measurement API (for example 3DLOOK, Bodygram or Esenca), which usually charges per scan.
+- **Body scan.** The flow assumes a measurement app or service supplies the numbers; which one is decided later. Until then the measurements are estimated from height and weight.
 - **Client account, orders, bookings.** Everything is example data or kept in this browser's `localStorage`. Nothing is sent anywhere.
 - **Prices, cloths and timings** are placeholders to replace with the tailor's real numbers. Set the currency with `BRAND.currency` at the top of the script.
 
