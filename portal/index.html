@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taylor Bespoke Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300..600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#101419;
+  --cloth:#161B22;
+  --cloth-2:#1D242D;
+  --seam:#2A333F;
+  --grid:rgba(148,156,168,.07);
+  --chalk:#ECE7DE;
+  --thread:#9AA2AE;
+  --dim:#6C7583;
+  --brass:#C9A45A;
+  --brass-2:#E3C685;
+  --brass-soft:rgba(201,164,90,.13);
+  --paper:#EEE9DF;
+  --paper-2:#E3DCCF;
+  --paper-ink:#1B1F26;
+  --paper-dim:#6A6558;
+  --ok:#8DBB9B;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--chalk);font:400 15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass-2);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;letter-spacing:-.005em}
+h1{font-size:clamp(34px,5.4vw,56px);line-height:1.04}
+h2{font-size:clamp(22px,2.6vw,28px);line-height:1.15}
+p{margin:0}
+.eyebrow{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.14em;color:var(--thread);margin:0}
+.lede{color:var(--thread);font-size:17px;max-width:58ch;font-weight:300}
+.muted{color:var(--thread)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--seam);background:transparent;font-weight:500;font-size:14px;letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .1s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--brass);border-color:var(--brass);color:#16130D}
+.btn.primary:hover{background:var(--brass-2);border-color:var(--brass-2)}
+.btn.ghost:hover{border-color:var(--thread)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(16,20,25,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--seam)}
+.top-in{display:flex;align-items:center;gap:24px;min-height:68px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand-name{font:500 26px/1 var(--display);letter-spacing:.01em}
+.brand-name em{font-style:italic;color:var(--brass-2)}
+.brand-tag{font:500 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.32em;color:var(--brass)}
+.steps{display:flex;gap:4px;margin-left:auto}
+.steps a{display:flex;align-items:center;gap:8px;padding:10px 14px;text-decoration:none;color:var(--thread);font-size:14px;letter-spacing:.02em;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.steps a:hover{color:var(--chalk)}
+.steps a[aria-current]{color:var(--chalk);border-bottom-color:var(--brass)}
+.steps i{font:500 10px/1 var(--mono);font-style:normal;width:18px;height:18px;display:grid;place-items:center;border:1px solid currentColor;border-radius:50%;opacity:.8}
+.who{display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.2}
+.who small{display:block;color:var(--dim);font-size:11px}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--cloth-2);border:1px solid var(--seam);font:500 12px/1 var(--mono);color:var(--brass-2)}
+@media (max-width:860px){
+  .who{display:none}
+  .top-in{gap:0;padding-block:10px 0}
+  .steps{margin-left:0;width:100%;justify-content:space-between}
+  .steps a{padding:12px 6px;font-size:13px}
+}
+
+.view{padding-block:40px 80px}
+.view[hidden]{display:none}
+.vh{display:grid;gap:12px;margin-bottom:32px}
+
+/* home */
+.hello{display:grid;gap:14px;margin-bottom:36px}
+.hello h1 em{font-style:italic;color:var(--brass-2)}
+.home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--cloth);border:1px solid var(--seam);border-radius:16px}
+.commission{grid-column:span 2;display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px;padding:24px 28px 24px 12px;overflow:hidden}
+.com-fig{background:radial-gradient(ellipse at 50% 40%,#232b36,transparent 70%);display:flex;align-items:center;justify-content:center}
+.com-fig svg{width:100%;height:auto;max-height:340px}
+.com-body{display:grid;gap:10px;align-content:start}
+.stages{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0}
+.stages li{position:relative;padding-top:22px;font-size:12px;line-height:1.3;color:var(--dim)}
+.stages li::before{content:"";position:absolute;top:4px;left:0;width:11px;height:11px;border-radius:50%;border:1.5px solid var(--seam);background:var(--cloth);z-index:1}
+.stages li::after{content:"";position:absolute;top:9px;left:11px;right:0;height:1.5px;background:var(--seam)}
+.stages li:last-child::after{display:none}
+.stages li.done{color:var(--thread)}
+.stages li.done::before{background:var(--brass);border-color:var(--brass)}
+.stages li.done::after{background:var(--brass)}
+.stages li.now{color:var(--chalk);font-weight:500}
+.stages li.now::before{border-color:var(--brass-2);box-shadow:0 0 0 4px var(--brass-soft);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(201,164,90,.04)}}
+.next{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--seam)}
+.next-when{display:grid;gap:4px;align-content:start}
+.next-when strong{font:500 22px/1.2 var(--display)}
+.next-when .num{font-size:13px;color:var(--brass-2)}
+.next blockquote{margin:0;font:italic 400 16px/1.5 var(--display);color:var(--thread)}
+.next cite{display:block;margin-top:8px;font:500 10.5px var(--mono);font-style:normal;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)}
+.stages small{display:block;color:var(--brass-2);font-family:var(--mono);font-size:10.5px;margin-top:3px;font-weight:400}
+.side-cards{display:grid;gap:18px}
+.meas-card,.new-card{padding:22px 24px;display:grid;gap:12px;align-content:start}
+.meas-card .big{font:500 44px/1 var(--display)}
+.meas-card .big span{font:400 14px var(--body);color:var(--thread);margin-left:6px}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:4px 0}
+.kv div{display:grid;gap:2px}
+.kv dt{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.kv dd{margin:0;font:500 15px var(--mono);font-variant-numeric:tabular-nums}
+.link{background:none;border:0;padding:0;color:var(--brass-2);cursor:pointer;text-decoration:none;font-size:14px;justify-self:start}
+.link:hover{text-decoration:underline;text-underline-offset:3px}
+.new-card{background:linear-gradient(160deg,#1E2530,#151A21);position:relative;overflow:hidden}
+.new-card h3{font-size:24px;line-height:1.15}
+.new-card::after{content:"";position:absolute;right:-30px;bottom:-30px;width:140px;height:140px;border-radius:50%;border:1px dashed rgba(201,164,90,.35)}
+.saved-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:48px 0 16px}
+.saved{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.sv{background:var(--cloth);border:1px solid var(--seam);border-radius:14px;padding:12px 12px 14px;display:grid;gap:8px;cursor:pointer;text-align:left;transition:border-color .2s,transform .2s}
+.sv:hover{border-color:var(--brass);transform:translateY(-2px)}
+.sv svg{width:100%;height:auto;border-radius:10px;background:radial-gradient(ellipse at 50% 35%,#222a34,#141920 75%)}
+.sv b{font-weight:500;font-size:14px}
+.sv small{display:block;color:var(--dim);font-size:12px}
+@media (max-width:980px){
+  .home-grid{grid-template-columns:1fr 1fr}
+  .commission{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .home-grid{grid-template-columns:1fr}
+  .commission{grid-template-columns:1fr;padding:18px 20px 22px}
+  .com-fig svg{max-height:260px}
+  .next{grid-template-columns:1fr}
+  .stage-bot .btn{padding:0 16px;font-size:13.5px}
+  .stages{grid-template-columns:1fr;gap:10px}
+  .stages li{padding:0 0 0 24px}
+  .stages li::before{top:3px}
+  .stages li::after{left:5px;top:16px;width:1.5px;height:calc(100% - 4px);right:auto}
+}
+
+/* measure */
+.measure-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.scanner{position:relative;aspect-ratio:3/4;max-height:660px;width:100%;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#1D2631,#0C1015 72%);border:1px solid var(--seam)}
+.scanner video,.scanner img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38;filter:grayscale(1) contrast(1.1)}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;-webkit-mask-image:radial-gradient(ellipse at center,#000 45%,transparent 85%);mask-image:radial-gradient(ellipse at center,#000 45%,transparent 85%)}
+.fig-svg{position:absolute;left:0;top:5%;width:100%;height:88%}
+.fig-g{transition:transform .9s cubic-bezier(.6,0,.2,1);transform-origin:150px 0}
+.scanner[data-stage="side"] .fig-g{transform:scaleX(.44)}
+.sil{fill:rgba(236,231,222,.045);stroke:var(--chalk);stroke-width:1.2;stroke-opacity:.75;transition:stroke .4s}
+.head{fill:rgba(236,231,222,.045);stroke:var(--chalk);stroke-width:1.2;stroke-opacity:.75}
+.scanner[data-stage="idle"] .sil,.scanner[data-stage="idle"] .head{stroke-dasharray:3 4;stroke-opacity:.5}
+.scanner[data-stage="front"] .sil,.scanner[data-stage="side"] .sil,.scanner[data-stage="front"] .head,.scanner[data-stage="side"] .head{stroke:var(--brass-2);stroke-dasharray:5 4}
+.lm{fill:var(--brass-2);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:opacity .3s,transform .3s}
+.scanner[data-stage="process"] .lm,.scanner[data-stage="done"] .lm{opacity:1;transform:scale(1);transition-delay:calc(var(--i) * 110ms)}
+.ml{fill:none;stroke:var(--brass);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s ease}
+.scanner[data-stage="done"] .ml{stroke-dashoffset:0;transition-delay:calc(var(--i) * 120ms)}
+.mlab{opacity:0;transition:opacity .4s;font:500 7.5px var(--mono);fill:var(--chalk);letter-spacing:.06em;paint-order:stroke;stroke:#0E1217;stroke-width:3px;stroke-linejoin:round}
+.scanner[data-stage="done"] .mlab{opacity:1;transition-delay:calc(var(--i) * 120ms + .4s)}
+.scanline{position:absolute;left:0;right:0;height:90px;top:-90px;background:linear-gradient(to bottom,transparent,rgba(201,164,90,.14) 75%,rgba(227,198,133,.95) 99%,transparent);opacity:0;pointer-events:none}
+.scanner[data-stage="process"] .scanline{opacity:1;animation:sweep 1.4s cubic-bezier(.5,0,.5,1) infinite alternate}
+@keyframes sweep{from{top:-90px}to{top:100%}}
+.count{position:absolute;inset:0;display:grid;place-items:center;font:500 132px/1 var(--mono);color:var(--brass-2);opacity:0;pointer-events:none;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.count.on{animation:pop .9s ease-out}
+@keyframes pop{0%{opacity:0;transform:scale(1.35)}25%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.9)}}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.on{animation:flash .45s ease-out}
+@keyframes flash{0%{opacity:.75}100%{opacity:0}}
+.corner{position:absolute;width:24px;height:24px;border:2px solid var(--brass);opacity:.8}
+.corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+.scan-status{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;background:rgba(12,16,21,.82);border:1px solid var(--seam);font:500 12px/1.2 var(--mono);letter-spacing:.04em;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.scan-status .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);flex:none}
+.scanner[data-stage="front"] .dot,.scanner[data-stage="side"] .dot,.scanner[data-stage="process"] .dot{background:var(--brass-2);animation:blink 1s infinite}
+.scanner[data-stage="idle"] .dot{background:var(--dim)}
+@keyframes blink{50%{opacity:.25}}
+.scan-side{display:grid;gap:22px;align-content:start}
+.scan-steps{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1px solid var(--seam);border-radius:14px;overflow:hidden}
+.scan-steps li{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:14px 16px;border-top:1px solid var(--seam);font-size:14px;color:var(--thread)}
+.scan-steps li:first-child{border-top:0}
+.scan-steps .n{font:500 11px var(--mono);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--seam)}
+.scan-steps b{display:block;color:var(--chalk);font-weight:500}
+.scan-steps small{font-size:12.5px;color:var(--dim)}
+.scan-steps .st{font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+.scan-steps li.active{background:var(--brass-soft)}
+.scan-steps li.active .n{border-color:var(--brass-2);color:var(--brass-2)}
+.scan-steps li.active .st{color:var(--brass-2)}
+.scan-steps li.ok .n{background:var(--brass);border-color:var(--brass);color:#16130D}
+.scan-steps li.ok .st{color:var(--ok)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:6px}
+.field label{font-size:12px;color:var(--thread);letter-spacing:.04em}
+.inp{position:relative}
+.inp input{width:100%;height:48px;border-radius:10px;border:1px solid var(--seam);background:var(--cloth);padding:0 44px 0 14px;font:500 17px var(--mono);font-variant-numeric:tabular-nums}
+.inp input:focus{border-color:var(--brass);outline:none}
+.inp span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:13px}
+.hint{font-size:13px;color:var(--dim);margin-top:-10px}
+.err{color:#E39A8B;font-size:13px}
+.upload{display:grid;gap:12px;padding-top:20px;border-top:1px solid var(--seam)}
+.up-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.up{position:relative;display:grid;place-items:center;gap:4px;height:92px;border:1px dashed var(--seam);border-radius:12px;cursor:pointer;text-align:center;font-size:13px;color:var(--thread);overflow:hidden;background-size:cover;background-position:center;transition:border-color .2s}
+.up:hover{border-color:var(--brass)}
+.up input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.up.has{border-style:solid;border-color:var(--brass);color:var(--chalk)}
+.up.has span{background:rgba(12,16,21,.75);padding:3px 10px;border-radius:999px;font-size:12px}
+.privacy{font-size:12.5px;color:var(--dim);display:flex;gap:8px;align-items:flex-start}
+.privacy::before{content:"";flex:none;width:12px;height:12px;margin-top:3px;border:1.5px solid var(--dim);border-radius:3px 3px 4px 4px}
+
+.results{margin-top:48px}
+.res-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.res-head h2 span{color:var(--thread);font-style:italic}
+.units{display:inline-flex;border:1px solid var(--seam);border-radius:999px;padding:3px}
+.units button{border:0;background:none;padding:6px 14px;border-radius:999px;cursor:pointer;font:500 12px var(--mono);color:var(--thread)}
+.units button[aria-pressed="true"]{background:var(--cloth-2);color:var(--chalk)}
+.tape{height:26px;margin:18px 0 0;border-radius:3px;background:
+  repeating-linear-gradient(90deg,rgba(22,19,13,.75) 0 1px,transparent 1px 10px) 0 100%/100% 7px no-repeat,
+  repeating-linear-gradient(90deg,rgba(22,19,13,.9) 0 1.5px,transparent 1.5px 50px) 0 100%/100% 13px no-repeat,
+  repeating-linear-gradient(90deg,rgba(22,19,13,.9) 0 1.5px,transparent 1.5px 100px) 0 100%/100% 20px no-repeat,
+  linear-gradient(#D9B85E,#C9A24B)}
+.mgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;border:1px solid var(--seam);border-top:0;border-radius:0 0 14px 14px;overflow:hidden}
+.mgrid div{padding:16px 18px;border-top:1px solid var(--seam);border-left:1px solid var(--seam);display:grid;gap:4px}
+.mgrid div:nth-child(5n+1){border-left:0}
+.mgrid div:nth-child(-n+5){border-top:0}
+.mgrid dt{font-size:12px;color:var(--thread);letter-spacing:.04em}
+.mgrid dd{margin:0;font:500 24px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.mgrid dd small{font-size:12px;color:var(--dim);margin-left:3px;font-weight:400}
+.res-foot{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;margin-top:24px;align-items:start}
+.notes ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.notes li{padding-left:18px;position:relative;color:var(--thread);font-size:14.5px;max-width:62ch}
+.notes li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1.5px;background:var(--brass)}
+.res-cta{display:grid;gap:14px;justify-items:start}
+.res-cta p{color:var(--dim);font-size:13.5px}
+@media (max-width:900px){
+  .measure-grid,.res-foot{grid-template-columns:1fr}
+  .scanner{max-height:none;aspect-ratio:4/5}
+  .mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mgrid div:nth-child(n){border-left:1px solid var(--seam);border-top:1px solid var(--seam)}
+  .mgrid div:nth-child(2n+1){border-left:0}
+  .mgrid div:nth-child(-n+2){border-top:0}
+}
+
+/* design */
+.design-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:32px;align-items:start}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 88px);border-radius:20px;border:1px solid var(--seam);background:
+  radial-gradient(ellipse 60% 50% at 50% 42%,rgba(236,231,222,.07),transparent 70%),
+  linear-gradient(180deg,#19202A,#10141A);padding:20px 22px;display:grid;gap:8px}
+.stage-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.stage-top h2{font-size:24px}
+.price{text-align:right;display:grid;gap:2px}
+.price strong{font:500 22px var(--mono);font-variant-numeric:tabular-nums;color:var(--brass-2)}
+.fig{display:flex;justify-content:center}
+.fig svg{height:min(66vh,640px);width:auto;max-width:100%;transition:opacity .2s}
+.stage-bot{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.opts{display:grid;gap:10px;margin:0}
+.osec{border-top:1px solid var(--seam);padding:22px 0 8px;display:grid;gap:18px}
+.osec:first-child{border-top:0;padding-top:0}
+.osec>h3{font-size:22px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.osec>h3 small{font:400 12px var(--body);color:var(--dim);letter-spacing:.02em}
+.grp{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
+.grp legend{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.14em;color:var(--thread);padding:0;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;cursor:pointer}
+.chip input,.fab input[type=radio],.lin input,.tog input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip>span{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 15px;border-radius:999px;border:1px solid var(--seam);font-size:14px;transition:border-color .15s,background .15s;color:var(--thread)}
+.chip>span small{color:var(--dim);font-family:var(--mono);font-size:11px}
+.chip:hover>span{border-color:var(--thread);color:var(--chalk)}
+.chip input:checked+span{border-color:var(--brass);background:var(--brass-soft);color:var(--chalk)}
+.chip input:focus-visible+span{outline:2px solid var(--brass-2);outline-offset:2px}
+.dot-c{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),inset -2px -3px 4px rgba(0,0,0,.35)}
+.rec{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ok);border:1px solid rgba(141,187,155,.4);border-radius:999px;padding:3px 9px}
+.fabrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px}
+.fab{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;padding:8px 10px 8px 8px;border-radius:12px;border:1px solid var(--seam);cursor:pointer;transition:border-color .15s,background .15s}
+.fab:hover{border-color:var(--thread)}
+.fab:has(input:checked){border-color:var(--brass);background:var(--brass-soft)}
+.fab:has(input:focus-visible){outline:2px solid var(--brass-2);outline-offset:2px}
+.fab-sw{width:44px;height:44px;border-radius:9px;overflow:hidden;display:block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.fab-sw svg{display:block;width:100%;height:100%}
+.fab-t{display:grid;gap:1px;min-width:0}
+.fab-t b{font-weight:500;font-size:13.5px;line-height:1.2}
+.fab-t small{font:400 10.5px/1.3 var(--mono);color:var(--dim)}
+.fab.custom .fab-sw{position:relative;background:conic-gradient(from 90deg,#8a2c3b,#b8923e,#2f4838,#2e57c9,#6b1e2b,#8a2c3b)}
+.fab.custom input[type=color]{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;opacity:0;cursor:pointer}
+.fab.custom .fab-sw i{position:absolute;inset:8px;border-radius:50%;border:2px solid rgba(255,255,255,.85)}
+.togs{display:flex;flex-wrap:wrap;gap:10px 22px}
+.tog{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--thread);min-height:40px}
+.tog small{color:var(--dim);font-size:12px;margin-left:6px}
+.tog .sw{width:36px;height:20px;border-radius:999px;background:var(--seam);position:relative;transition:background .2s;flex:none}
+.tog .sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--thread);transition:transform .2s,background .2s}
+.tog input:checked~.sw{background:var(--brass)}
+.tog input:checked~.sw::after{transform:translateX(16px);background:#16130D}
+.tog input:checked~span:last-child{color:var(--chalk)}
+.tog input:focus-visible~.sw{outline:2px solid var(--brass-2);outline-offset:2px}
+.linings{display:flex;flex-wrap:wrap;gap:12px}
+.lin{display:grid;justify-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--dim);width:60px;text-align:center}
+.lin i{width:40px;height:40px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);background-image:linear-gradient(135deg,rgba(255,255,255,.28),transparent 45%,rgba(0,0,0,.28));transition:box-shadow .15s}
+.lin input:checked+i{box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--brass)}
+.lin input:checked~span{color:var(--chalk)}
+.lin input:focus-visible+i{outline:2px solid var(--brass-2);outline-offset:4px}
+.inside{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px;align-items:end}
+.inside .field input{width:100%;height:46px;border-radius:10px;border:1px solid var(--seam);background:var(--cloth);padding:0 14px;font:italic 500 18px var(--display)}
+.inside .field input:focus{outline:none;border-color:var(--brass)}
+.label-prev{height:92px;border-radius:10px;position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.label-prev::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px)}
+.label-prev span{position:relative;font:italic 500 22px var(--display);color:#F2E6C9;text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.label-prev small{position:absolute;bottom:6px;left:0;right:0;text-align:center;font:500 8.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(242,230,201,.7)}
+.opts-end{display:flex;gap:10px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--seam)}
+@media (max-width:900px){
+  .design-grid{grid-template-columns:1fr}
+  .stage{position:relative;top:0}
+  .fig svg{height:min(56vh,520px)}
+}
+
+/* review */
+.review-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start}
+.ticket{background:var(--paper);color:var(--paper-ink);border-radius:6px;padding:30px clamp(18px,3vw,34px) 26px;position:relative;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);
+  -webkit-mask:radial-gradient(circle 7px at 50% 0,transparent 97%,#000) 0 0/22px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 97%,#000) 0 100%/22px 51% repeat-x;
+  mask:radial-gradient(circle 7px at 50% 0,transparent 97%,#000) 0 0/22px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 97%,#000) 0 100%/22px 51% repeat-x}
+.tk-top{display:flex;justify-content:space-between;gap:12px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)}
+.tk-title{font:italic 500 38px/1.05 var(--display);margin:14px 0 6px}
+.tk-meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--paper-dim);padding-bottom:16px;border-bottom:1.5px solid var(--paper-ink)}
+.tk-meta b{color:var(--paper-ink);font-weight:500}
+.tk-body{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;padding:18px 0}
+.tk-fig svg{width:100%;height:auto;border-radius:4px;background:#DAD2C3}
+.tk-spec{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 16px;font-size:14px;align-content:start}
+.tk-spec dt{font:500 10.5px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--paper-dim)}
+.tk-spec dd{margin:0}
+.tk-meas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--paper-2);border:1px solid var(--paper-2);border-radius:4px;overflow:hidden}
+.tk-meas div{background:var(--paper);padding:8px 10px;display:grid;gap:1px}
+.tk-meas span{font:500 9.5px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--paper-dim)}
+.tk-meas b{font:500 15px var(--mono);font-variant-numeric:tabular-nums}
+.tk-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px dashed #B9B0A0}
+.tk-foot strong{display:block;font:500 28px var(--mono);font-variant-numeric:tabular-nums}
+.tk-foot .eyebrow{color:var(--paper-dim)}
+.tk-foot p{font-size:13px;color:var(--paper-dim);text-align:right}
+.book{padding:26px;display:grid;gap:18px}
+.book h2{font-size:26px}
+.days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.day{position:relative;cursor:pointer}
+.day input{position:absolute;opacity:0;width:1px;height:1px}
+.day span{display:grid;gap:0;padding:10px 12px;border:1px solid var(--seam);border-radius:12px;transition:border-color .15s,background .15s}
+.day span b{font:500 20px/1.1 var(--display)}
+.day span small{font-size:12px;color:var(--dim)}
+.day:hover span{border-color:var(--thread)}
+.day input:checked+span{border-color:var(--brass);background:var(--brass-soft)}
+.day input:focus-visible+span{outline:2px solid var(--brass-2);outline-offset:2px}
+.chip.taken{pointer-events:none}
+.chip.taken>span{text-decoration:line-through;opacity:.35}
+.book textarea{width:100%;min-height:84px;border-radius:12px;border:1px solid var(--seam);background:var(--ink);padding:12px 14px;resize:vertical;font-size:14px}
+.book textarea:focus{outline:none;border-color:var(--brass)}
+.confirm{border:1px solid rgba(141,187,155,.45);background:rgba(141,187,155,.08);border-radius:14px;padding:18px;display:grid;gap:6px}
+.confirm b{font:500 20px var(--display)}
+.confirm p{font-size:13.5px;color:var(--thread)}
+.save-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media (max-width:980px){.review-grid{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .tk-body{grid-template-columns:1fr}
+  .tk-fig{max-width:200px}
+  .tk-meas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tk-title{font-size:30px}
+  .tk-foot p{text-align:left}
+  .days{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fields,.up-row{grid-template-columns:1fr 1fr}
+  .inside{grid-template-columns:1fr}
+}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--chalk);color:var(--ink);padding:11px 20px;border-radius:999px;font-size:14px;font-weight:500;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:50;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{border-top:1px solid var(--seam);padding-block:22px;color:var(--dim);font-size:12.5px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#home"><span class="brand-name">Taylor</span><span class="brand-tag">Bespoke</span></a>
+    <nav class="steps" aria-label="Portal sections">
+      <a href="#home" data-view="home">Portal</a>
+      <a href="#measure" data-view="measure"><i>1</i>Measure</a>
+      <a href="#design" data-view="design"><i>2</i>Design</a>
+      <a href="#review" data-view="review"><i>3</i>Review</a>
+    </nav>
+    <div class="who"><span class="avatar">AM</span><span>Alex Morgan<small>Example client</small></span></div>
+  </div>
+</header>
+
+<main>
+  <!-- PORTAL HOME -->
+  <section class="view" id="v-home">
+    <div class="wrap">
+      <div class="hello">
+        <p class="eyebrow">Client portal</p>
+        <h1><span id="greet">Good evening</span>, <em>Alex.</em></h1>
+        <p class="lede">Your double-breasted is being cut. Fittings, measurements and your next suit are all here.</p>
+      </div>
+      <div class="home-grid">
+        <article class="card commission">
+          <div class="com-fig" id="com-fig"></div>
+          <div class="com-body">
+            <p class="eyebrow">Current commission · No. 0419</p>
+            <h2>Navy chalk stripe, double-breasted</h2>
+            <p class="muted">Peak lapels · 6×2 · side vents · claret lining</p>
+            <ol class="stages" id="stages"></ol>
+            <div class="next" id="next-fit"></div>
+          </div>
+        </article>
+        <div class="side-cards">
+          <article class="card meas-card" id="meas-card"></article>
+          <article class="card new-card">
+            <p class="eyebrow">Next commission</p>
+            <h3>Design a suit on your own measurements</h3>
+            <p class="muted">Choose the cloth, cut and details. Your tailor reviews the design before anything is cut.</p>
+            <a class="btn primary" href="#design" style="justify-self:start">Start designing</a>
+          </article>
+        </div>
+      </div>
+      <div class="saved-h"><h2>Saved designs</h2><a class="link" href="#design">New design →</a></div>
+      <div class="saved" id="saved"></div>
+    </div>
+  </section>
+
+  <!-- MEASURE -->
+  <section class="view" id="v-measure" hidden>
+    <div class="wrap">
+      <header class="vh">
+        <p class="eyebrow">Step 1 of 3</p>
+        <h1>Measure from home</h1>
+        <p class="lede">Two photos, front and side. The scan takes the ten measurements your tailor needs to draft your pattern.</p>
+      </header>
+      <div class="measure-grid">
+        <div class="scanner" id="scanner" data-stage="done">
+          <video id="cam" playsinline muted hidden></video>
+          <img class="ph" id="ph" alt="" hidden>
+          <div class="grid-bg"></div>
+          <svg class="fig-svg" id="fig-svg" viewBox="0 0 300 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+          <div class="scanline"></div>
+          <div class="count" id="count"></div>
+          <div class="flash" id="flash"></div>
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <div class="scan-status" role="status"><span class="dot"></span><span id="scan-msg">Scan complete</span></div>
+        </div>
+        <div class="scan-side">
+          <ol class="scan-steps" id="scan-steps">
+            <li data-s="front"><span class="n">1</span><span><b>Front photo</b><small>Feet hip-width apart, arms slightly out</small></span><span class="st">Done</span></li>
+            <li data-s="side"><span class="n">2</span><span><b>Side photo</b><small>Turn left, arms relaxed</small></span><span class="st">Done</span></li>
+            <li data-s="process"><span class="n">3</span><span><b>Measuring</b><small>Landmarks mapped to 10 measurements</small></span><span class="st">Done</span></li>
+          </ol>
+          <div class="fields">
+            <div class="field"><label for="in-height">Height</label><div class="inp"><input id="in-height" type="number" inputmode="numeric" min="140" max="210" value="180"><span>cm</span></div></div>
+            <div class="field"><label for="in-weight">Weight</label><div class="inp"><input id="in-weight" type="number" inputmode="numeric" min="40" max="180" value="80"><span>kg</span></div></div>
+          </div>
+          <p class="hint">Height calibrates the scan. Weight sharpens chest and waist.</p>
+          <p class="err" id="scan-err" hidden></p>
+          <button class="btn primary" id="btn-scan" type="button">Start body scan</button>
+          <div class="upload">
+            <p class="eyebrow">Or use photos you already have</p>
+            <div class="up-row">
+              <label class="up" id="up-front-l"><input type="file" id="up-front" accept="image/*"><span>Front photo</span></label>
+              <label class="up" id="up-side-l"><input type="file" id="up-side" accept="image/*"><span>Side photo</span></label>
+            </div>
+            <button class="btn ghost" id="btn-analyse" type="button" disabled>Measure from photos</button>
+          </div>
+          <p class="privacy">Photos are measured, then deleted. Only the numbers stay on your file.</p>
+        </div>
+      </div>
+      <div class="results" id="results"></div>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="view" id="v-design" hidden>
+    <div class="wrap design-grid">
+      <div class="stage">
+        <div class="stage-top">
+          <div><p class="eyebrow" id="st-spec"></p><h2 id="st-name"></h2></div>
+          <div class="price"><span class="eyebrow">Indicative</span><strong id="st-price"></strong></div>
+        </div>
+        <div class="fig" id="fig"></div>
+        <div class="stage-bot">
+          <button class="btn ghost" id="btn-save" type="button">Save design</button>
+          <a class="btn primary" href="#review">Review and book →</a>
+        </div>
+      </div>
+      <form class="opts" id="opts" autocomplete="off"></form>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section class="view" id="v-review" hidden>
+    <div class="wrap">
+      <header class="vh">
+        <p class="eyebrow">Step 3 of 3</p>
+        <h1>Review and book</h1>
+        <p class="lede">This is the cutting ticket your tailor works from. Book a fitting and they'll go through it with you in the shop.</p>
+      </header>
+      <div class="review-grid">
+        <div>
+          <div class="ticket" id="cut-ticket"></div>
+          <div class="save-strip">
+            <a class="btn ghost" href="#design">← Change design</a>
+            <button class="btn ghost" id="btn-save-2" type="button">Save to my designs</button>
+          </div>
+        </div>
+        <div class="card book" id="book"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap">Prototype · example client and data · nothing is sent or stored outside this browser</div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- config ---------- */
+const BRAND = { currency: '£' };
+
+/* ---------- helpers ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const r1 = v => Math.round(v * 10) / 10;
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('tb:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('tb:' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function hexToRgb(h) { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function rgbToHex(r, g, b) { return '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join(''); }
+function shade(h, a) { const [r, g, b] = hexToRgb(h); const t = a < 0 ? 0 : 255, p = Math.abs(a); return rgbToHex(r + (t - r) * p, g + (t - g) * p, b + (t - b) * p); }
+function lum(h) { const [r, g, b] = hexToRgb(h).map(v => v / 255); return .2126 * r + .7152 * g + .0722 * b; }
+const money = n => BRAND.currency + n.toLocaleString('en-GB');
+const fmtDate = (d, o = { day: 'numeric', month: 'short', year: 'numeric' }) => d.toLocaleDateString('en-GB', o);
+
+/* ---------- catalogue ---------- */
+const FABRICS = [
+  { id: 'navy', name: 'Midnight Navy', spec: 'Super 120s · 260 g', color: '#1F2B47', weave: 'twill', price: 1450 },
+  { id: 'charcoal', name: 'Charcoal Flannel', spec: 'Flannel · 340 g', color: '#3C3F45', weave: 'mottle', price: 1450 },
+  { id: 'grey', name: 'Mid-Grey Sharkskin', spec: 'Super 110s · 270 g', color: '#7A7F88', weave: 'shark', price: 1450 },
+  { id: 'chalk', name: 'Navy Chalk Stripe', spec: 'Flannel · 320 g', color: '#1C2540', weave: 'stripe', price: 1600 },
+  { id: 'pow', name: 'Prince of Wales Check', spec: 'Worsted · 280 g', color: '#8E897D', weave: 'check', price: 1650 },
+  { id: 'tobacco', name: 'Tobacco Linen', spec: 'Linen · 300 g', color: '#8A6943', weave: 'slub', price: 1350 },
+  { id: 'green', name: 'Bottle Green Tweed', spec: 'Tweed · 420 g', color: '#2F4838', weave: 'herringbone', price: 1550 },
+  { id: 'stone', name: 'Stone Cotton', spec: 'Cotton · 290 g', color: '#BDB29B', weave: 'twill', price: 1300 },
+  { id: 'black', name: 'Black Barathea', spec: 'Barathea · 290 g', color: '#18191C', weave: 'twill', price: 1500 },
+];
+const CUTS = {
+  sb1: { name: 'Single-breasted, 1 button', short: '1-button', roll: 292, btns: [[200, 300]] },
+  sb2: { name: 'Single-breasted, 2 button', short: '2-button', roll: 266, btns: [[200, 274], [200, 320]] },
+  sb3: { name: 'Single-breasted, 3 button', short: '3-button', roll: 232, btns: [[200, 240], [200, 280], [200, 320]] },
+  db6: { name: 'Double-breasted, 6×2', short: 'Double-breasted', roll: 262, db: true, btns: [[176, 272], [224, 272], [176, 316], [224, 316], [166, 230], [234, 230]] },
+};
+const FIT = { slim: { W: 84, H: 98, open: 38, name: 'Slim' }, tailored: { W: 89, H: 101, open: 43, name: 'Tailored' }, classic: { W: 96, H: 106, open: 51, name: 'Classic' } };
+const LAPW = { slim: 13, classic: 19, wide: 27 };
+const LAPW_CM = { slim: '6 cm', classic: '8.5 cm', wide: '11 cm' };
+const BUTTONS = { 'horn-dark': { name: 'Dark horn', c: '#2E2018' }, 'horn-light': { name: 'Light horn', c: '#9A7752' }, pearl: { name: 'Mother of pearl', c: '#E7E2D8' }, brass: { name: 'Brass', c: '#B8923E' }, match: { name: 'Matched to cloth', c: null } };
+const LININGS = [
+  { id: 'claret', name: 'Claret', c: '#6B1E2B' }, { id: 'gold', name: 'Old gold', c: '#A8853A' }, { id: 'bottle', name: 'Bottle', c: '#24473A' },
+  { id: 'dove', name: 'Dove grey', c: '#A5A7AB' }, { id: 'cobalt', name: 'Cobalt', c: '#2E57C9' }, { id: 'blush', name: 'Blush', c: '#D6A49C' },
+];
+const TIES = { none: { name: 'Open collar', c: null }, navy: { name: 'Navy grenadine', c: '#1B2440' }, burgundy: { name: 'Burgundy', c: '#5E1A26' }, silver: { name: 'Silver', c: '#B9BCC2' }, lining: { name: 'Match lining', c: null } };
+const POCKETS = { flap: 'Flap', jetted: 'Jetted', patch: 'Patch' };
+const VENTS = { none: 'No vent', single: 'Centre vent', double: 'Side vents' };
+
+const DEFAULT_DESIGN = { fabric: 'navy', custom: '#5B2A3A', jacket: 'sb2', fit: 'tailored', lapel: 'notch', lapelW: 'classic', pockets: 'flap', ticket: false, breast: true, square: true, vents: 'double', buttons: 'horn-dark', lining: 'claret', tie: 'navy', trousers: 'flat', cuffs: false, monogram: 'A.M.' };
+const COMMISSION = { ...DEFAULT_DESIGN, fabric: 'chalk', jacket: 'db6', lapel: 'peak', lapelW: 'wide', buttons: 'horn-dark', tie: 'burgundy', square: true, cuffs: true };
+const DEFAULT_SAVED = [
+  { name: 'Summer wedding', date: '2026-08-02', design: { ...DEFAULT_DESIGN, fabric: 'tobacco', jacket: 'sb2', pockets: 'patch', buttons: 'horn-light', lining: 'blush', tie: 'none', square: true } },
+  { name: 'Black tie', date: '2026-07-11', design: { ...DEFAULT_DESIGN, fabric: 'black', jacket: 'sb1', lapel: 'shawl', pockets: 'jetted', buttons: 'match', lining: 'dove', tie: 'none', breast: true, square: true, vents: 'none' } },
+  { name: 'Country weekend', date: '2026-06-20', design: { ...DEFAULT_DESIGN, fabric: 'green', jacket: 'sb3', pockets: 'flap', ticket: true, buttons: 'horn-light', lining: 'gold', tie: 'burgundy', cuffs: true, fit: 'classic' } },
+];
+const fabricOf = d => d.fabric === 'custom' ? { id: 'custom', name: 'Your colour', spec: 'Sourced to match', color: d.custom, weave: 'twill', price: 1750 } : (FABRICS.find(f => f.id === d.fabric) || FABRICS[0]);
+
+/* ---------- state ---------- */
+function measure(h, w) {
+  const k = w / ((h / 100) ** 2) - 23;
+  const half = v => Math.round(v * 2) / 2;
+  return {
+    chest: half(.555 * h + k * 1.9), waist: half(.455 * h + k * 2.6), seat: half(.545 * h + k * 1.8),
+    shoulder: half(.258 * h + k * .25), sleeve: half(.352 * h), neck: half(.212 * h + k * .55),
+    back: half(.42 * h), inside: half(.455 * h), thigh: half(.315 * h + k * 1.3), bicep: half(.178 * h + k * .8),
+  };
+}
+function defaultScan() { const d = new Date(); d.setDate(d.getDate() - 18); return { h: 180, w: 80, date: d.toISOString(), m: measure(180, 80) }; }
+const state = {
+  units: store.get('units', 'cm'),
+  scan: store.get('scan', null) || defaultScan(),
+  design: { ...DEFAULT_DESIGN, ...store.get('design', {}) },
+  saved: store.get('saved', null) || DEFAULT_SAVED,
+  booking: { day: null, time: null, sent: false },
+};
+const MLABELS = { chest: 'Chest', waist: 'Waist', seat: 'Seat', shoulder: 'Shoulder', sleeve: 'Sleeve', neck: 'Neck', back: 'Jacket length', inside: 'Inside leg', thigh: 'Thigh', bicep: 'Bicep' };
+function fmtLen(cm) {
+  if (state.units === 'cm') return cm.toFixed(1);
+  const q = Math.round(cm / 2.54 * 4) / 4, w = Math.floor(q);
+  return w + ['', '¼', '½', '¾'][Math.round((q - w) * 4)];
+}
+const unit = () => state.units === 'cm' ? 'cm' : 'in';
+function sizing(m) {
+  const chestIn = m.chest / 2.54, drop = Math.round((m.chest - m.waist) / 2.54);
+  const size = Math.round(chestIn / 2) * 2;
+  const len = state.scan.h < 173 ? 'S' : state.scan.h > 186 ? 'L' : 'R';
+  const fit = drop >= 7 ? 'slim' : drop >= 5 ? 'tailored' : 'classic';
+  return { size: size + len, drop, fit };
+}
+function postureNotes(s) {
+  const k = s.w / ((s.h / 100) ** 2) - 23, seed = (s.h * 7 + s.w * 3) % 5;
+  const notes = [];
+  notes.push(`Right shoulder sits ${(0.4 + seed * 0.15).toFixed(1)} cm lower than the left. The pattern will be balanced with a touch more padding on that side.`);
+  if (seed % 2) notes.push('Slight forward head posture. The collar will be cut to sit close at the back of the neck.');
+  else notes.push('Upright stance with a square back. Standard balance front to back.');
+  if (k > 2.5) notes.push('Seat is full relative to the chest. Trousers get extra room through the back rise.');
+  else if (k < -1.5) notes.push('Narrow through the waist. Jacket can take extra suppression without pulling at the button.');
+  else notes.push('Chest to waist is well proportioned for a close, clean silhouette.');
+  return notes;
+}
+
+/* ---------- fabric patterns ---------- */
+function weave(id, f) {
+  const c = f.color, L = shade(c, .16), D = shade(c, -.28);
+  const P = (w, h, inner) => `<pattern id="${id}" width="${w}" height="${h}" patternUnits="userSpaceOnUse"><rect width="${w}" height="${h}" fill="${c}"/>${inner}</pattern>`;
+  switch (f.weave) {
+    case 'stripe': return P(15, 15, `<path d="M0 5l5-5M-1 16l17-17M10 16l6-6" stroke="${L}" stroke-width=".7" opacity=".45"/><rect x="7" width="1" height="15" fill="#E7E2D6" opacity=".6"/>`);
+    case 'check': return P(48, 48, `<path d="M0 6h48M0 18h48M0 30h48M0 42h48M6 0v48M18 0v48M30 0v48M42 0v48" stroke="${L}" stroke-width=".6" opacity=".35"/><path d="M0 1h48M0 3.5h48M0 25h48M0 27.5h48M1 0v48M3.5 0v48M25 0v48M27.5 0v48" stroke="${D}" stroke-width="1" opacity=".55"/><path d="M0 13.5h48M13.5 0v48" stroke="#4E6484" stroke-width="1" opacity=".7"/>`);
+    case 'herringbone': return P(12, 8, `<path d="M0 8L6 0M6 0l6 8" stroke="${L}" stroke-width="1.2" opacity=".5"/><path d="M-1 8L5 0M7 0l6 8" stroke="${D}" stroke-width=".8" opacity=".45"/>`);
+    case 'shark': return P(4, 4, `<rect width="2" height="2" fill="${L}" opacity=".45"/><rect x="2" y="2" width="2" height="2" fill="${D}" opacity=".35"/>`);
+    case 'mottle': return P(26, 26, `<circle cx="4" cy="6" r="2.2" fill="${L}" opacity=".22"/><circle cx="17" cy="3" r="1.4" fill="${D}" opacity=".3"/><circle cx="12" cy="15" r="2.8" fill="${L}" opacity=".16"/><circle cx="22" cy="20" r="1.8" fill="${L}" opacity=".24"/><circle cx="5" cy="21" r="1.2" fill="${D}" opacity=".35"/><path d="M0 0l26 26M13 0l13 13M0 13l13 13" stroke="${L}" stroke-width=".5" opacity=".18"/>`);
+    case 'slub': return P(30, 10, `<path d="M0 2h11M16 2h9M3 5.5h16M22 5.5h8M0 8.5h6M10 8.5h14" stroke="${L}" stroke-width=".9" opacity=".4"/><path d="M12 2h3M20 5.5h1.5M26 8.5h3" stroke="${D}" stroke-width="1.2" opacity=".45"/>`);
+    default: return P(5, 5, `<path d="M0 5L5 0M-1 1l2-2M4 6l2-2" stroke="${L}" stroke-width=".8" opacity=".35"/>`);
+  }
+}
+function swatchSVG(f, id) { return `<svg viewBox="0 0 44 44" aria-hidden="true"><defs>${weave(id, f)}<linearGradient id="${id}g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient></defs><rect width="44" height="44" fill="url(#${id})"/><rect width="44" height="44" fill="url(#${id}g)"/></svg>`; }
+
+/* ---------- suit flat renderer ---------- */
+const Lg = p => ({ t: 'L', p }), Cb = (c1, c2, p) => ({ t: 'C', c1, c2, p });
+function mirrorPath(start, segs, close) {
+  const m = ([x, y]) => [r1(400 - x), y];
+  let d = `M${start}`;
+  segs.forEach(s => { d += s.t === 'L' ? ` L${s.p}` : ` C${s.c1} ${s.c2} ${s.p}`; });
+  const pts = [start, ...segs.map(s => s.p)];
+  for (let i = segs.length - 1; i >= 0; i--) {
+    const s = segs[i], prev = pts[i];
+    d += s.t === 'L' ? ` L${m(prev)}` : ` C${m(s.c2)} ${m(s.c1)} ${m(prev)}`;
+  }
+  return d + (close || '') + ' Z';
+}
+function suitSVG(d, p, opt = {}) {
+  const f = fabricOf(d), fit = FIT[d.fit] || FIT.tailored, cut = CUTS[d.jacket] || CUTS.sb2, lw = LAPW[d.lapelW] || 19;
+  const S = Math.round(106 * (opt.scale || 1)), NW = 30, W = fit.W, H = fit.H;
+  const R = [200, cut.roll];
+  const lowBtn = cut.db ? 414 : cut.btns[cut.btns.length - 1][1];
+  const light = lum(f.color) > .4;
+  const line = light ? 'rgba(25,22,18,.5)' : 'rgba(255,255,255,.24)';
+  const stitch = light ? 'rgba(25,22,18,.32)' : 'rgba(255,255,255,.26)';
+  const fab = `url(#${p}fab)`;
+  const lining = (LININGS.find(l => l.id === d.lining) || LININGS[0]).c;
+  const btnC = d.buttons === 'match' ? shade(f.color, light ? -.4 : .12) : (BUTTONS[d.buttons] || BUTTONS['horn-dark']).c;
+  const tieC = d.tie === 'lining' ? lining : (TIES[d.tie] || TIES.navy).c;
+  const o = fit.open, hw = H - 8;
+
+  // trousers
+  const trousers = `M${200 - hw},392 L${200 + hw},392 Q${200 + hw + 2},520 ${200 + 6 + o},688 L${205},688 L${202},452 L${198},452 L${195},688 L${194 - o},688 Q${200 - hw - 2},520 ${200 - hw},392 Z`;
+  let tDetail = '';
+  for (const s of [-1, 1]) {
+    const cx = 200 + s * (5 + o / 2);
+    tDetail += `<path d="M${cx},418 L${cx},${d.cuffs ? 672 : 684}" stroke="${line}" stroke-width=".9" stroke-dasharray="${light ? '0' : '0'}" opacity=".7"/>`;
+    if (d.trousers === 'pleat') tDetail += `<path d="M${cx - s * 7},416 Q${cx - s * 6},432 ${cx - s * 3},446" stroke="${line}" fill="none" stroke-width=".9"/>`;
+    if (d.cuffs) tDetail += `<path d="M${200 + s * 5},673 L${200 + s * (6 + o)},673" stroke="${line}" stroke-width="1.1"/><path d="M${200 + s * 5},676 L${200 + s * (6 + o)},676" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2"/>`;
+  }
+  const shoe = (x1, x2) => `<path d="M${x1},686 L${x2},686 C${x2 - 9},688 ${x2 - 11},702 ${x2 - 1},704 L${x1 + 1},704 C${x1 + 4},702 ${x1 + 4},690 ${x1},686 Z" fill="#0C0D0F"/><path d="M${x2 - 4},695 Q${(x1 + x2) / 2},690 ${x1 - 2},694" stroke="rgba(255,255,255,.18)" fill="none" stroke-width="1"/>`;
+  const shoes = `<g>${shoe(196, 194 - o)}</g><g transform="matrix(-1 0 0 1 400 0)">${shoe(196, 194 - o)}</g>`;
+
+  // jacket body
+  const segs = [
+    Lg([200 - S, 88]),
+    Cb([200 - S - 3, 125], [200 - S + 6, 172], [200 - S + 10, 198]),
+    Cb([200 - S + 12, 236], [200 - W, 250], [200 - W, 290]),
+    Cb([200 - W, 336], [200 - H, 372], [200 - H, 414]),
+  ];
+  if (cut.db) segs.push(Lg([200, 417]));
+  else segs.push(Cb([200 - H + 34, 418], [200 - 54, 421], [200 - 34, 420]), Cb([200 - 14, 419], [200 - 3, 404], [200, lowBtn + 20]));
+  const body = mirrorPath([200 - NW, 66], segs, ` Q200,56 ${200 - NW},66`);
+
+  // sleeve (viewer's left, mirrored for right)
+  const sleeve = `M${200 - S},88 C${200 - S - 15},150 ${200 - S - 26},290 ${200 - S - 31},392 L${200 - S + 1},397 C${200 - S + 4},300 ${200 - S + 8},232 ${200 - S + 10},198 C${200 - S + 6},172 ${200 - S - 3},125 ${200 - S},88 Z`;
+  const cuff = `M${200 - S - 32},386 L${200 - S + 1},391 L${200 - S + 1},404 L${200 - S - 31},399 Z`;
+  let sbtn = '';
+  for (let i = 0; i < 4; i++) { const t = i / 3; sbtn += `<circle cx="${r1(200 - S - 20 - 3 * t)}" cy="${r1(356 + 26 * t)}" r="2.3" fill="${btnC}" stroke="rgba(0,0,0,.35)" stroke-width=".5"/>`; }
+  const sleeveG = `<path d="${cuff}" fill="#EFEDE8"/><path d="${sleeve}" fill="${fab}"/><path d="${sleeve}" fill="url(#${p}sh)"/><path d="${sleeve}" fill="none" stroke="${line}" stroke-width="1"/><path d="M${200 - S - 30},378 L${200 - S + 1},383" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2"/>${sbtn}`;
+
+  // V opening: shirt + tie
+  const vL = [200 - NW + 3, 64], vR = [200 + NW - 3, 64];
+  const vPoly = `M${vL} L${vR} L${R} Z`;
+  let tie = '';
+  if (tieC) tie = `<path d="M194,74 L206,74 L203.5,87 L196.5,87 Z" fill="${tieC}"/><path d="M196.5,87 L203.5,87 L210,${R[1] + 4} L190,${R[1] + 4} Z" fill="${tieC}"/><path d="M196.5,87 L203.5,87 L210,${R[1] + 4} L190,${R[1] + 4} Z" fill="url(#${p}sh)" opacity=".6"/>`;
+  const collar = tieC
+    ? `<path d="M172,62 L194,74 L186,98 Z M228,62 L206,74 L214,98 Z" fill="#F4F2EE" stroke="#C9C4BA" stroke-width=".8"/>`
+    : `<path d="M186,66 L200,${Math.min(R[1] - 40, 120)} L214,66 Z" fill="#D9C2A8"/><path d="M172,62 L190,68 L181,102 Z M228,62 L210,68 L219,102 Z" fill="#F4F2EE" stroke="#C9C4BA" stroke-width=".8"/>`;
+  const shirt = `<clipPath id="${p}v"><path d="${vPoly}"/></clipPath><g clip-path="url(#${p}v)"><rect x="160" y="50" width="80" height="${R[1]}" fill="#EFEDE8"/><path d="M200,70 L200,${R[1]}" stroke="#D6D2CA" stroke-width=".8"/>${tie}${collar}</g>`;
+
+  // lapels
+  const gy = cut.db ? 122 : 128;
+  const xv = r1((200 - NW + 3) + (NW - 3) * (gy - 64) / (R[1] - 64));
+  const tip = r1(xv - lw - 15);
+  const rise = R[1] - gy;
+  let lap, edge, gorge = '';
+  if (d.lapel === 'peak') {
+    edge = `M${R} C${R[0] - lw * .7},${R[1] - rise * .45} ${tip - 2},${gy + rise * .3} ${tip - 3},${gy + 2}`;
+    lap = `${edge} L${tip - 13},${gy - 17} L${tip + 15},${gy - 6} C${tip + 18},${gy - 30} ${200 - NW - 8},78 ${200 - NW - 2},62 L${vL} Z`;
+    gorge = `M${tip + 15},${gy - 6} L${xv - 3},${gy - 11}`;
+  } else if (d.lapel === 'shawl') {
+    edge = `M${R} C${R[0] - lw * 1.1},${R[1] - rise * .5} ${tip - 6},${gy + 30} ${tip + 2},${gy - 6}`;
+    lap = `${edge} C${tip + 8},${gy - 40} ${200 - NW - 8},72 ${200 - NW - 2},62 L${vL} Z`;
+  } else {
+    edge = `M${R} C${R[0] - lw * .6},${R[1] - rise * .45} ${tip + 1},${gy + rise * .28} ${tip},${gy + 4}`;
+    lap = `${edge} L${tip + 11},${gy - 2} L${tip + 4},${gy - 13} C${tip + 8},${gy - 40} ${200 - NW - 8},76 ${200 - NW - 2},62 L${vL} Z`;
+    gorge = `M${tip + 11},${gy - 2} L${xv - 3},${gy - 8}`;
+  }
+  const shawlSatin = d.lapel === 'shawl' && d.fabric === 'black';
+  const lapFill = shawlSatin ? '#0C0C0E' : fab;
+  const lapelOne = `<path d="${lap}" fill="${lapFill}"/><path d="${lap}" fill="${shawlSatin ? `url(#${p}satin)` : 'rgba(255,255,255,.05)'}"/><path d="${lap}" fill="none" stroke="${line}" stroke-width="1"/>${gorge ? `<path d="${gorge}" stroke="${line}" stroke-width=".9"/>` : ''}<path d="${edge}" transform="translate(3.5,0)" fill="none" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2.2"/>`;
+  const lapels = `<g>${lapelOne}</g><g transform="matrix(-1 0 0 1 400 0)">${lapelOne}</g><path d="M${r1(400 - tip - 8)},${gy + 16} l8,3" stroke="${line}" stroke-width="1.3" stroke-linecap="round"/>`;
+
+  // pockets
+  let pk = '';
+  const py = 342;
+  for (const s of [-1, 1]) {
+    const cx = 200 + s * 62;
+    if (d.pockets === 'patch') pk += `<path d="M${cx - 25},${py - 8} h50 v38 q0,8 -8,8 h-34 q-8,0 -8,-8 Z" fill="${fab}"/><path d="M${cx - 25},${py - 8} h50 v38 q0,8 -8,8 h-34 q-8,0 -8,-8 Z" fill="rgba(255,255,255,.04)" stroke="${line}"/><path d="M${cx - 21},${py - 4} h42 v33 q0,6 -6,6 h-30 q-6,0 -6,-6 Z" fill="none" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2"/>`;
+    else if (d.pockets === 'jetted') pk += `<rect x="${cx - 24}" y="${py}" width="48" height="3.4" rx="1" fill="${shade(f.color, -.35)}" stroke="${line}" stroke-width=".8"/>`;
+    else pk += `<rect x="${cx - 25}" y="${py}" width="50" height="15" rx="1.5" fill="${fab}"/><rect x="${cx - 25}" y="${py}" width="50" height="15" rx="1.5" fill="rgba(255,255,255,.05)" stroke="${line}" stroke-width=".9"/><path d="M${cx - 22},${py + 12} h44" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2"/>`;
+  }
+  if (d.ticket && d.pockets !== 'patch') {
+    const cx = 200 - 64, ty = py - 24;
+    pk += d.pockets === 'jetted' ? `<rect x="${cx - 18}" y="${ty}" width="36" height="3" rx="1" fill="${shade(f.color, -.35)}" stroke="${line}" stroke-width=".8"/>`
+      : `<rect x="${cx - 18}" y="${ty}" width="36" height="12" rx="1.5" fill="${fab}"/><rect x="${cx - 18}" y="${ty}" width="36" height="12" rx="1.5" fill="rgba(255,255,255,.05)" stroke="${line}" stroke-width=".9"/>`;
+  }
+  let breast = '';
+  if (d.breast) {
+    const sq = d.square ? `<path d="M${200 + 50},196 Q${200 + 53},181 ${200 + 60},188 Q${200 + 64},176 ${200 + 70},186 Q${200 + 76},180 ${200 + 77},192 Z" fill="${lining}"/><path d="M${200 + 60},188 L${200 + 62},194 M${200 + 70},186 L${200 + 69},193" stroke="rgba(0,0,0,.25)" stroke-width=".7"/>` : '';
+    breast = d.pockets === 'patch'
+      ? `${sq}<path d="M${200 + 44},192 h36 v28 q0,6 -6,6 h-24 q-6,0 -6,-6 Z" fill="${fab}"/><path d="M${200 + 44},192 h36 v28 q0,6 -6,6 h-24 q-6,0 -6,-6 Z" fill="rgba(255,255,255,.04)" stroke="${line}"/>`
+      : `${sq}<path d="M${200 + 45},197 L${200 + 80},191 L${200 + 80},198 L${200 + 45},204 Z" fill="${fab}"/><path d="M${200 + 45},197 L${200 + 80},191 L${200 + 80},198 L${200 + 45},204 Z" fill="rgba(255,255,255,.05)" stroke="${line}" stroke-width=".9"/>`;
+  }
+
+  // front edge + darts
+  const front = cut.db
+    ? `<path d="M${R} C214,${R[1] + 4} 234,${R[1] + 10} 236,${R[1] + 24} L236,416" fill="none" stroke="${line}" stroke-width="1.1"/><path d="M${R} C214,${R[1] + 4} 234,${R[1] + 10} 236,${R[1] + 24} L236,416" transform="translate(-3.5,0)" fill="none" stroke="${stitch}" stroke-width=".6" stroke-dasharray="1.5 2.2"/>`
+    : `<path d="M200,${R[1]} L200,${lowBtn + 20}" stroke="${line}" stroke-width="1.1"/>`;
+  const darts = `<path d="M${200 - 54},214 Q${200 - 57},290 ${200 - 60},338 M${200 + 54},214 Q${200 + 57},290 ${200 + 60},338" fill="none" stroke="${stitch}" stroke-width=".7"/>`;
+  const btns = cut.btns.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5.3" fill="${btnC}" stroke="rgba(0,0,0,.4)" stroke-width=".7"/><circle cx="${x - 1.6}" cy="${y - 1.8}" r="1.6" fill="#fff" opacity=".22"/><g fill="rgba(0,0,0,.45)"><circle cx="${x - 1.3}" cy="${y - 1.3}" r=".6"/><circle cx="${x + 1.3}" cy="${y - 1.3}" r=".6"/><circle cx="${x - 1.3}" cy="${y + 1.3}" r=".6"/><circle cx="${x + 1.3}" cy="${y + 1.3}" r=".6"/></g>`).join('');
+
+  const neck = `<path d="M182,70 L183,36 Q200,28 217,36 L218,70 Z" fill="#CBBDA2"/><path d="M182,70 L183,36 Q200,28 217,36 L218,70 Z" fill="url(#${p}sh)" opacity=".7"/><ellipse cx="200" cy="34" rx="17" ry="5" fill="#7A5C40"/><ellipse cx="200" cy="33" rx="12" ry="3" fill="#8F6D4D"/>`;
+  const collarBand = `<path d="M180,60 Q200,70 220,60 L222,69 Q200,80 178,69 Z" fill="#F4F2EE" stroke="#C9C4BA" stroke-width=".7"/>`;
+
+  const vb = opt.viewBox || '0 20 400 700';
+  return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(f.name)} ${esc(cut.short)} suit, ${esc(d.lapel)} lapels">
+<defs>${weave(p + 'fab', f)}
+<linearGradient id="${p}sh" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".34"/><stop offset=".32" stop-color="#fff" stop-opacity=".07"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".36"/></linearGradient>
+<linearGradient id="${p}vs" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".07"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+<linearGradient id="${p}satin" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset=".45" stop-color="#fff" stop-opacity=".3"/><stop offset=".6" stop-color="#fff" stop-opacity=".04"/></linearGradient>
+</defs>
+<ellipse cx="200" cy="706" rx="112" ry="8" fill="#000" opacity=".4"/>
+<path d="${trousers}" fill="${fab}"/><path d="${trousers}" fill="url(#${p}sh)"/><path d="${trousers}" fill="url(#${p}vs)"/><path d="${trousers}" fill="none" stroke="${line}" stroke-width="1"/>${tDetail}
+${shoes}
+<path d="${body}" fill="${fab}"/><path d="${body}" fill="url(#${p}sh)"/><path d="${body}" fill="url(#${p}vs)"/><path d="${body}" fill="none" stroke="${line}" stroke-width="1"/>
+${neck}${collarBand}${shirt}
+${darts}${pk}${front}${lapels}${breast}${btns}
+<g>${sleeveG}</g><g transform="matrix(-1 0 0 1 400 0)">${sleeveG}</g>
+</svg>`;
+}
+const JACKET_VB = '52 22 296 430';
+
+/* ---------- body scan figure ---------- */
+function smooth(pts) {
+  const n = pts.length; let d = `M${pts[0]}`;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    const c1 = [r1(p1[0] + (p2[0] - p0[0]) / 6), r1(p1[1] + (p2[1] - p0[1]) / 6)];
+    const c2 = [r1(p2[0] - (p3[0] - p1[0]) / 6), r1(p2[1] - (p3[1] - p1[1]) / 6)];
+    d += ` C${c1} ${c2} ${p2}`;
+  }
+  return d + ' Z';
+}
+const HALF = [[140, 88], [138, 104], [117, 112], [101, 120], [92, 138], [86, 184], [78, 232], [68, 284], [61, 320], [56, 340], [61, 355], [71, 350], [75, 326], [83, 284], [92, 236], [100, 198], [106, 170], [110, 205], [113, 242], [108, 280], [104, 310], [104, 350], [109, 420], [112, 448], [112, 488], [121, 550], [111, 570], [117, 582], [143, 582], [143, 558], [140, 490], [140, 448], [143, 385], [150, 340]];
+const BODY_PTS = [...HALF, ...HALF.slice(0, -1).reverse().map(([x, y]) => [300 - x, y])];
+function figureSVG() {
+  const m = state.scan.m, u = unit();
+  const L = (k) => `${MLABELS[k].toUpperCase()} ${fmtLen(m[k])}`;
+  const lms = [[150, 104], [101, 120], [199, 120], [78, 232], [222, 232], [61, 320], [239, 320], [104, 310], [196, 310], [112, 448], [188, 448], [121, 550], [179, 550]];
+  return `<g class="fig-g"><ellipse class="head" cx="150" cy="58" rx="23" ry="29"/><path class="sil" d="${smooth(BODY_PTS)}"/></g>
+  <g>${lms.map((p, i) => `<circle class="lm" cx="${p[0]}" cy="${p[1]}" r="2.6" style="--i:${i}"/>`).join('')}</g>
+  <g>
+    <path class="ml" pathLength="1" style="--i:0" d="M101,122 L199,122"/><text class="mlab" style="--i:0" x="150" y="134" text-anchor="middle">${L('shoulder')}</text>
+    <path class="ml" pathLength="1" style="--i:1" d="M107,174 Q150,180 193,174"/><text class="mlab" style="--i:1" x="150" y="170" text-anchor="middle">${L('chest')}</text>
+    <path class="ml" pathLength="1" style="--i:2" d="M113,244 Q150,250 187,244"/><text class="mlab" style="--i:2" x="150" y="240" text-anchor="middle">${L('waist')}</text>
+    <path class="ml" pathLength="1" style="--i:3" d="M104,312 Q150,318 196,312"/><text class="mlab" style="--i:3" x="150" y="306" text-anchor="middle">${L('seat')}</text>
+    <path class="ml" pathLength="1" style="--i:4" d="M99,122 L90,150 L78,232 L61,322"/><text class="mlab" style="--i:4" x="64" y="248" text-anchor="end">${L('sleeve')}</text>
+    <path class="ml" pathLength="1" style="--i:5" d="M150,342 L150,578"/><text class="mlab" style="--i:5" x="182" y="520" text-anchor="start">${L('inside')}</text>
+  </g>`;
+}
+
+/* ---------- views ---------- */
+const VIEWS = ['home', 'measure', 'design', 'review'];
+function show(v) {
+  if (!VIEWS.includes(v)) v = 'home';
+  VIEWS.forEach(n => { $('#v-' + n).hidden = n !== v; });
+  $$('.steps a').forEach(a => a.dataset.view === v ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+  if (v === 'home') renderHome();
+  if (v === 'measure') renderResults();
+  if (v === 'design') renderDesign(true);
+  if (v === 'review') renderReview();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2200);
+}
+
+/* home */
+function renderHome() {
+  const h = new Date().getHours();
+  $('#greet').textContent = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+  $('#com-fig').innerHTML = suitSVG(COMMISSION, 'cm-', { viewBox: '40 20 320 700' });
+  const baste = new Date(); baste.setDate(baste.getDate() + 8); if (baste.getDay() === 0) baste.setDate(baste.getDate() + 1);
+  const stages = [['Measured', 'done'], ['Cloth cut', 'done'], ['Baste fitting', 'now'], ['Forward fitting', ''], ['Finishing', ''], ['Collection', '']];
+  $('#stages').innerHTML = stages.map(([n, c]) => `<li class="${c}">${n}</li>`).join('');
+  $('#next-fit').innerHTML = `<div class="next-when"><p class="eyebrow">Next · baste fitting</p><strong>${fmtDate(baste, { weekday: 'long', day: 'numeric', month: 'long' })}</strong><span class="num">10:30 · 45 min · at the shop</span></div>
+    <blockquote>“Cloth arrived from the mill on Tuesday and the baste is chalked up. Bring the shoes you’ll wear with it so we can set the trouser length.”<cite>Your tailor</cite></blockquote>`;
+  const m = state.scan.m, z = sizing(m);
+  $('#meas-card').innerHTML = `<p class="eyebrow">Measurements on file</p>
+    <div class="big">${z.size}<span>drop ${z.drop}</span></div>
+    <dl class="kv"><div><dt>Chest</dt><dd>${fmtLen(m.chest)}</dd></div><div><dt>Waist</dt><dd>${fmtLen(m.waist)}</dd></div><div><dt>Sleeve</dt><dd>${fmtLen(m.sleeve)}</dd></div></dl>
+    <p class="muted" style="font-size:13px">Scanned ${fmtDate(new Date(state.scan.date))} · ${unit()}</p>
+    <a class="link" href="#measure">View all or rescan →</a>`;
+  $('#saved').innerHTML = state.saved.map((s, i) => {
+    const f = fabricOf(s.design), c = CUTS[s.design.jacket] || CUTS.sb2;
+    return `<button class="sv" type="button" data-load="${i}">${suitSVG(s.design, 'sv' + i + '-', { viewBox: JACKET_VB })}<span><b>${esc(s.name)}</b><small>${esc(f.name)} · ${esc(c.short)}</small></span></button>`;
+  }).join('');
+}
+$('#saved').addEventListener('click', e => {
+  const b = e.target.closest('[data-load]'); if (!b) return;
+  const s = state.saved[+b.dataset.load];
+  state.design = { ...DEFAULT_DESIGN, ...s.design }; store.set('design', state.design);
+  location.hash = 'design';
+  toast(`Loaded “${s.name}”`);
+});
+
+/* measure */
+function renderResults() {
+  const m = state.scan.m, z = sizing(m);
+  $('#fig-svg').innerHTML = figureSVG();
+  $('#in-height').value = state.scan.h; $('#in-weight').value = state.scan.w;
+  $('#results').innerHTML = `
+    <div class="res-head">
+      <div style="display:grid;gap:8px"><p class="eyebrow">Your measurements · scanned ${fmtDate(new Date(state.scan.date))}</p><h2>Suggested ${z.size} <span>· drop ${z.drop}, ${FIT[z.fit].name.toLowerCase()} fit</span></h2></div>
+      <div class="units" role="group" aria-label="Units"><button type="button" data-u="cm" aria-pressed="${state.units === 'cm'}">cm</button><button type="button" data-u="in" aria-pressed="${state.units === 'in'}">in</button></div>
+    </div>
+    <div class="tape" aria-hidden="true"></div>
+    <dl class="mgrid">${Object.keys(MLABELS).map(k => `<div><dt>${MLABELS[k]}</dt><dd>${fmtLen(m[k])}<small>${unit()}</small></dd></div>`).join('')}</dl>
+    <div class="res-foot">
+      <div class="notes"><p class="eyebrow">Posture notes · for your tailor</p><ul>${postureNotes(state.scan).map(n => `<li>${n}</li>`).join('')}</ul></div>
+      <div class="res-cta"><p>Your tailor checks every number by hand at the first fitting.</p><a class="btn primary" href="#design">Design your suit →</a></div>
+    </div>`;
+}
+$('#results').addEventListener('click', e => {
+  const b = e.target.closest('[data-u]'); if (!b) return;
+  state.units = b.dataset.u; store.set('units', state.units); renderResults();
+});
+
+let scanRun = 0, camStream = null;
+function setStage(s, msg) {
+  $('#scanner').dataset.stage = s; $('#scan-msg').textContent = msg;
+  const order = ['front', 'side', 'process'];
+  $$('#scan-steps li').forEach(li => {
+    const i = order.indexOf(li.dataset.s), cur = s === 'done' ? 3 : s === 'idle' ? -1 : order.indexOf(s);
+    li.classList.toggle('ok', i < cur); li.classList.toggle('active', i === cur);
+    $('.st', li).textContent = i < cur ? 'Done' : i === cur ? 'Now' : '';
+  });
+}
+async function countdown(run) {
+  const c = $('#count');
+  for (const n of [3, 2, 1]) {
+    if (run !== scanRun) return false;
+    c.textContent = n; c.classList.remove('on'); void c.offsetWidth; c.classList.add('on');
+    await sleep(900);
+  }
+  const fl = $('#flash'); fl.classList.remove('on'); void fl.offsetWidth; fl.classList.add('on');
+  await sleep(350);
+  return run === scanRun;
+}
+async function tryCamera() {
+  try {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return null;
+    const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+    const v = $('#cam'); v.srcObject = s; v.hidden = false; await v.play(); return s;
+  } catch (e) { return null; }
+}
+function stopCamera() { if (camStream) { camStream.getTracks().forEach(t => t.stop()); camStream = null; } $('#cam').hidden = true; }
+function readInputs() {
+  const h = +$('#in-height').value, w = +$('#in-weight').value, err = $('#scan-err');
+  if (!(h >= 140 && h <= 210) || !(w >= 40 && w <= 180)) {
+    err.textContent = 'Enter a height between 140 and 210 cm and a weight between 40 and 180 kg.'; err.hidden = false; return null;
+  }
+  err.hidden = true; return { h, w };
+}
+async function processScan(run, hw) {
+  setStage('process', 'Mapping landmarks…');
+  await sleep(1400); if (run !== scanRun) return;
+  $('#scan-msg').textContent = 'Calculating measurements…';
+  await sleep(1300); if (run !== scanRun) return;
+  state.scan = { h: hw.h, w: hw.w, date: new Date().toISOString(), m: measure(hw.h, hw.w) };
+  store.set('scan', state.scan);
+  const rec = sizing(state.scan.m).fit; state.design.fit = rec; store.set('design', state.design);
+  renderResults(); setStage('idle', ''); void $('#scanner').offsetWidth;
+  setStage('done', 'Scan complete · 10 measurements');
+  $('#btn-scan').textContent = 'Scan again'; $('#btn-scan').disabled = false; $('#btn-analyse').disabled = !$('#up-front').files.length;
+  toast('Measurements saved to your file');
+}
+$('#btn-scan').addEventListener('click', async () => {
+  const hw = readInputs(); if (!hw) return;
+  const run = ++scanRun; $('#btn-scan').disabled = true; $('#btn-analyse').disabled = true;
+  $('#ph').hidden = true;
+  setStage('front', 'Opening camera…');
+  camStream = await tryCamera();
+  if (run !== scanRun) return;
+  setStage('front', camStream ? 'Step into the outline · front' : 'Demo scan · stand facing the camera');
+  await sleep(1100);
+  if (!await countdown(run)) return;
+  setStage('side', 'Turn to your left · side photo');
+  await sleep(1200);
+  if (!await countdown(run)) return;
+  stopCamera();
+  await processScan(run, hw);
+});
+function onUpload(input, label) {
+  const f = input.files[0]; if (!f) return;
+  const url = URL.createObjectURL(f);
+  label.style.backgroundImage = `url("${url}")`; label.classList.add('has');
+  if (input.id === 'up-front') { const ph = $('#ph'); ph.src = url; ph.hidden = false; }
+  $('#btn-analyse').disabled = !$('#up-front').files.length;
+}
+$('#up-front').addEventListener('change', e => onUpload(e.target, $('#up-front-l')));
+$('#up-side').addEventListener('change', e => onUpload(e.target, $('#up-side-l')));
+$('#btn-analyse').addEventListener('click', async () => {
+  const hw = readInputs(); if (!hw) return;
+  const run = ++scanRun; $('#btn-scan').disabled = true; $('#btn-analyse').disabled = true;
+  stopCamera(); $('#ph').hidden = !$('#up-front').files.length;
+  setStage('side', 'Reading photos…'); await sleep(900); if (run !== scanRun) return;
+  await processScan(run, hw);
+});
+
+/* design */
+function chipGroup(key, label, opts, extra = '') {
+  return `<fieldset class="grp"><legend>${label}${extra}</legend><div class="chips">${opts.map(([v, t, sub, dot]) =>
+    `<label class="chip"><input type="radio" name="${key}" id="${key}-${v}" value="${v}"${state.design[key] === v ? ' checked' : ''}><span>${dot ? `<i class="dot-c" style="background:${dot}"></i>` : ''}${t}${sub ? ` <small>${sub}</small>` : ''}</span></label>`).join('')}</div></fieldset>`;
+}
+function tog(key, label, sub) {
+  return `<label class="tog"><input type="checkbox" name="${key}" id="${key}"${state.design[key] ? ' checked' : ''}><span class="sw"></span><span>${label}${sub ? `<small>${sub}</small>` : ''}</span></label>`;
+}
+function buildOpts() {
+  const d = state.design, rec = sizing(state.scan.m).fit;
+  const fabs = FABRICS.map(f => `<label class="fab"><input type="radio" name="fabric" id="fabric-${f.id}" value="${f.id}"${d.fabric === f.id ? ' checked' : ''}><span class="fab-sw">${swatchSVG(f, 'sw-' + f.id)}</span><span class="fab-t"><b>${f.name}</b><small>${f.spec}</small></span></label>`).join('')
+    + `<label class="fab custom"><input type="radio" name="fabric" id="fabric-custom" value="custom"${d.fabric === 'custom' ? ' checked' : ''}><span class="fab-sw" id="custom-sw"${d.fabric === 'custom' ? ` style="background:${d.custom}"` : ''}><input type="color" id="custom" value="${d.custom}" aria-label="Pick any colour"><i></i></span><span class="fab-t"><b>Any colour</b><small>Sourced to match</small></span></label>`;
+  $('#opts').innerHTML = `
+  <section class="osec"><h3>Cloth <small>${FABRICS.length} bunches in stock</small></h3><div class="fabrics">${fabs}</div></section>
+  <section class="osec"><h3>Jacket</h3>
+    ${chipGroup('jacket', 'Front', Object.entries(CUTS).map(([k, c]) => [k, c.short === 'Double-breasted' ? 'Double-breasted' : c.short, c.db ? '6×2' : 'SB']))}
+    ${chipGroup('fit', 'Silhouette', Object.entries(FIT).map(([k, f]) => [k, f.name]), ` &nbsp;<span class="rec">Suits your scan: ${FIT[rec].name}</span>`)}
+  </section>
+  <section class="osec"><h3>Lapels</h3>
+    ${chipGroup('lapel', 'Style', [['notch', 'Notch'], ['peak', 'Peak'], ['shawl', 'Shawl']])}
+    ${chipGroup('lapelW', 'Width at the notch', [['slim', 'Slim', '6 cm'], ['classic', 'Classic', '8.5 cm'], ['wide', 'Wide', '11 cm']])}
+  </section>
+  <section class="osec"><h3>Pockets</h3>
+    ${chipGroup('pockets', 'Hip pockets', Object.entries(POCKETS))}
+    <div class="togs">${tog('ticket', 'Ticket pocket')}${tog('breast', 'Breast pocket')}${tog('square', 'Pocket square', 'in lining silk')}</div>
+  </section>
+  <section class="osec"><h3>Trousers</h3>
+    ${chipGroup('trousers', 'Front', [['flat', 'Flat front'], ['pleat', 'Single pleat']])}
+    <div class="togs">${tog('cuffs', 'Turn-ups', '4 cm')}</div>
+  </section>
+  <section class="osec"><h3>Finishing</h3>
+    ${chipGroup('buttons', 'Buttons', Object.entries(BUTTONS).map(([k, b]) => [k, b.name, '', b.c || shade(fabricOf(d).color, -.3)]))}
+    <fieldset class="grp"><legend>Lining</legend><div class="linings">${LININGS.map(l => `<label class="lin"><input type="radio" name="lining" id="lining-${l.id}" value="${l.id}"${d.lining === l.id ? ' checked' : ''}><i style="background-color:${l.c}"></i><span>${l.name}</span></label>`).join('')}</div></fieldset>
+    ${chipGroup('vents', 'Vents', Object.entries(VENTS))}
+    ${chipGroup('tie', 'Styled with', Object.entries(TIES).map(([k, t]) => [k, t.name, '', t.c || (k === 'lining' ? (LININGS.find(l => l.id === d.lining) || LININGS[0]).c : null)]))}
+    <div class="inside">
+      <div class="field"><label for="monogram">Monogram, stitched inside the lining</label><input id="monogram" name="monogram" maxlength="6" value="${esc(d.monogram)}" placeholder="A.M."></div>
+      <div class="label-prev" id="label-prev"></div>
+    </div>
+  </section>
+  <div class="opts-end"><a class="btn primary" href="#review">Review and book →</a><button class="btn ghost" type="button" id="btn-reset">Start again</button></div>`;
+}
+function price(d) {
+  let p = fabricOf(d).price;
+  if ((CUTS[d.jacket] || {}).db) p += 120;
+  if (d.lapel === 'shawl') p += 60;
+  if (d.ticket) p += 45;
+  if (d.square) p += 35;
+  if (d.buttons === 'pearl') p += 60;
+  if (d.buttons === 'brass') p += 40;
+  if (d.monogram.trim()) p += 30;
+  return p;
+}
+function shoulderScale() { return Math.max(.93, Math.min(1.07, state.scan.m.shoulder / 46.5)); }
+function renderFigure() {
+  const d = state.design, f = fabricOf(d);
+  $('#fig').innerHTML = suitSVG(d, 'mn-', { scale: shoulderScale() });
+  $('#st-spec').textContent = f.spec;
+  $('#st-name').textContent = f.name;
+  $('#st-price').textContent = money(price(d));
+  const lin = (LININGS.find(l => l.id === d.lining) || LININGS[0]).c;
+  const lp = $('#label-prev');
+  if (lp) { lp.style.background = lin; lp.innerHTML = `<span>${esc(d.monogram.trim() || '—')}</span><small>Taylor · Bespoke</small>`; }
+  const csw = $('#custom-sw'); if (csw) csw.style.background = d.fabric === 'custom' ? d.custom : '';
+}
+function renderDesign(rebuild) { if (rebuild || !$('#opts').children.length) buildOpts(); renderFigure(); }
+$('#opts').addEventListener('input', e => {
+  const t = e.target, d = state.design;
+  if (t.id === 'custom') { d.custom = t.value; d.fabric = 'custom'; $('#fabric-custom').checked = true; }
+  else if (t.type === 'checkbox') d[t.name] = t.checked;
+  else if (t.name) d[t.name] = t.value;
+  store.set('design', d);
+  if (t.name === 'fabric' || t.name === 'lining' || t.id === 'custom') {
+    // buttons "matched" dot and tie "match lining" dot depend on these
+    const mDot = $('#buttons-match + span .dot-c'); if (mDot) mDot.style.background = shade(fabricOf(d).color, -.3);
+    const tDot = $('#tie-lining + span .dot-c'); if (tDot) tDot.style.background = (LININGS.find(l => l.id === d.lining) || LININGS[0]).c;
+  }
+  renderFigure();
+});
+$('#opts').addEventListener('submit', e => e.preventDefault());
+$('#opts').addEventListener('click', e => {
+  if (e.target.id !== 'btn-reset') return;
+  state.design = { ...DEFAULT_DESIGN, fit: sizing(state.scan.m).fit }; store.set('design', state.design);
+  renderDesign(true); toast('Design reset');
+});
+function saveDesign() {
+  const d = state.design, f = fabricOf(d), c = CUTS[d.jacket];
+  state.saved.unshift({ name: `${f.name}, ${c.short.toLowerCase()}`, date: new Date().toISOString().slice(0, 10), design: { ...d } });
+  state.saved = state.saved.slice(0, 8); store.set('saved', state.saved);
+  toast('Saved to your designs');
+}
+$('#btn-save').addEventListener('click', saveDesign);
+$('#btn-save-2').addEventListener('click', saveDesign);
+
+/* review */
+function slots() {
+  const out = []; const d = new Date(); d.setHours(0, 0, 0, 0);
+  while (out.length < 6) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0) out.push(new Date(d)); }
+  return out;
+}
+const TIMES = ['10:00', '11:30', '14:00', '16:30'];
+function renderReview() {
+  const d = state.design, f = fabricOf(d), c = CUTS[d.jacket], m = state.scan.m, z = sizing(m);
+  const lin = LININGS.find(l => l.id === d.lining) || LININGS[0];
+  const pockets = [POCKETS[d.pockets], d.ticket && d.pockets !== 'patch' ? 'ticket' : '', d.breast ? 'breast' : '', d.square ? 'square' : ''].filter(Boolean).join(', ');
+  const spec = [
+    ['Cloth', `${f.name} <span style="color:var(--paper-dim)">· ${f.spec}</span>`],
+    ['Jacket', `${c.name}, ${FIT[d.fit].name.toLowerCase()}`],
+    ['Lapel', `${d.lapel[0].toUpperCase() + d.lapel.slice(1)}, ${LAPW_CM[d.lapelW]}`],
+    ['Pockets', pockets],
+    ['Vents', VENTS[d.vents]],
+    ['Buttons', BUTTONS[d.buttons].name],
+    ['Lining', lin.name],
+    ['Trousers', `${d.trousers === 'pleat' ? 'Single pleat' : 'Flat front'}${d.cuffs ? ', 4 cm turn-ups' : ', plain hem'}`],
+    ['Monogram', d.monogram.trim() ? `<i style="font-family:var(--display)">${esc(d.monogram)}</i>` : '—'],
+  ];
+  const mk = ['chest', 'waist', 'seat', 'shoulder', 'sleeve', 'neck', 'back', 'inside', 'thigh', 'bicep'];
+  $("#cut-ticket").innerHTML = `
+    <div class="tk-top"><span>Taylor · Bespoke</span><span>No. 0427</span></div>
+    <h2 class="tk-title">Cutting ticket</h2>
+    <div class="tk-meta"><span>Client <b>Alex Morgan</b></span><span>Date <b>${fmtDate(new Date())}</b></span><span>Size <b>${z.size}</b></span><span>Units <b>${unit()}</b></span></div>
+    <div class="tk-body"><div class="tk-fig">${suitSVG(d, 'tk-', { scale: shoulderScale() })}</div><dl class="tk-spec">${spec.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>
+    <div class="tk-meas">${mk.map(k => `<div><span>${MLABELS[k]}</span><b>${fmtLen(m[k])}</b></div>`).join('')}</div>
+    <div class="tk-foot"><div><span class="eyebrow">Indicative, two-piece</span><strong>${money(price(d))}</strong></div><p>8–10 weeks · 2 fittings<br>Final price confirmed at consultation</p></div>`;
+  renderBook();
+}
+function renderBook() {
+  const b = state.booking, days = slots();
+  if (b.sent) {
+    $('#book').innerHTML = `<p class="eyebrow">Book a fitting</p><div class="confirm"><b>Fitting requested</b><p>${esc(b.label)}. In the live portal this lands in the tailor's diary and you get a confirmation email.</p><p style="color:var(--dim)">Prototype: nothing was sent.</p></div><button class="btn ghost" type="button" id="btn-rebook">Choose another time</button>`;
+    return;
+  }
+  const dayIdx = b.day == null ? -1 : b.day;
+  $('#book').innerHTML = `
+    <p class="eyebrow">Book a fitting</p>
+    <h2>Go through it together in the shop</h2>
+    <p class="muted" style="font-size:14px">45 minutes. Bring the shoes you'll wear with the suit.</p>
+    <div class="days" role="radiogroup" aria-label="Day">${days.map((dt, i) => `<label class="day"><input type="radio" name="bday" id="bday-${i}" value="${i}"${dayIdx === i ? ' checked' : ''}><span><small>${dt.toLocaleDateString('en-GB', { weekday: 'short' })}</small><b>${dt.getDate()}</b><small>${dt.toLocaleDateString('en-GB', { month: 'short' })}</small></span></label>`).join('')}</div>
+    <div class="chips" role="radiogroup" aria-label="Time">${TIMES.map((t, i) => { const taken = dayIdx >= 0 && (dayIdx * 3 + i) % 4 === 1; return `<label class="chip${taken ? ' taken' : ''}"><input type="radio" name="btime" id="btime-${i}" value="${t}"${b.time === t && !taken ? ' checked' : ''}${dayIdx < 0 || taken ? ' disabled' : ''}><span class="num">${t}</span></label>`; }).join('')}</div>
+    <div class="field"><label for="bnote">Anything your tailor should know?</label><textarea id="bnote" placeholder="e.g. Wedding on 14 November, so it needs to be ready a week before.">${esc(b.note || '')}</textarea></div>
+    <button class="btn primary" type="button" id="btn-book"${dayIdx >= 0 && b.time ? '' : ' disabled'}>Request fitting</button>`;
+}
+$('#book').addEventListener('change', e => {
+  const t = e.target, b = state.booking;
+  if (t.name === 'bday') { b.day = +t.value; b.time = null; renderBook(); }
+  if (t.name === 'btime') { b.time = t.value; $('#btn-book').disabled = false; }
+});
+$('#book').addEventListener('input', e => { if (e.target.id === 'bnote') state.booking.note = e.target.value; });
+$('#book').addEventListener('click', e => {
+  const b = state.booking;
+  if (e.target.id === 'btn-book') {
+    const dt = slots()[b.day];
+    b.label = `${fmtDate(dt, { weekday: 'long', day: 'numeric', month: 'long' })} at ${b.time}`; b.sent = true; renderBook();
+    toast('Fitting requested');
+  }
+  if (e.target.id === 'btn-rebook') { b.sent = false; renderBook(); }
+});
+
+/* boot */
+state.design.fit = state.design.fit || sizing(state.scan.m).fit;
+renderResults();
+setStage('done', 'Scan complete · 10 measurements');
+show(location.hash.slice(1) || 'home');
+</script>
+</body>
+</html>
